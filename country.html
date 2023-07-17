@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Per capita greenhouse gas emissions</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap');
+    .read {
+      font-family: 'IBM Plex Sans KR', sans-serif;
+      font-size: xx-small;
+      color: rgb(168, 168, 168);
+      float: right;
+    }
+    .disney {
+        font-family: 'Noto Serif KR', serif;
+        font-size: small;
+        color: rgba(0, 0, 0);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="emissionsChart"></canvas>
+
+  <script>
+    // Sample data for change in greenhouse gas emissions by country
+    const emissionsData = {
+      labels: ["2010","2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019"],
+      datasets: [{
+        label: "미국(단위:톤(t))",
+        data: [20.80,19.99,19.14,19.44,19.45,18.95,18.50,18.21,18.72,18.24],
+        fill: false,
+        borderColor: "rgba(150, 0, 255, 1)",
+        tension: 0.1
+      },
+      {
+        label: "한국(단위:톤(t))",
+        data: [13.03,13.45,13.44,13.38,13.10,13.46,13.63,13.86,13.98,13.64],
+        fill: false,
+        borderColor: "rgba(0, 110, 255, 1)",
+        tension: 0.1
+      },
+      {
+        label: "일본(단위:톤(t))",
+        data: [9.61,10.07,10.40,10.51,10.19,9.93,9.88,9.78,9.47,9.20],
+        fill: false,
+        borderColor: "rgba(255, 208, 0, 1)",
+        tension: 0.1
+      },
+      {
+        label: "중국(단위:톤(t))",
+        data: [7.47,8.06,8.23,8.53,8.53,8.40,8.35,8.47,8.74,8.86],
+        fill: false,
+        borderColor: "rgba(255, 0, 0, 1)",
+        tension: 0.1
+      }]
+      
+    };
+
+    // Create the chart
+    const ctx = document.getElementById('emissionsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: emissionsData,
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            display: true,
+            title: {
+              display: true,
+              text: '연도'
+            }
+          },
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: '1인당 온실가스 배출량(단위:톤(t))'
+            },
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        }
+      }
+    });
+  </script>
+  <a class="disney" href="https://ourworldindata.org/grapher/per-capita-ghg-excl-land-use" target="_blank">출처 : Our World in Data(Per capita greenhouse gas emissions, excluding land use and forestry)</div>
+  <s class="read">여러분.. 저희가 중국이랑 일본보다 배출량이 많은게 말이 됩니까..?</s>
+</body>
+</html>
+

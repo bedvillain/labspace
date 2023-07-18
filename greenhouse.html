@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Korea's Greenhouse Gas Emissions</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap');
+    .front {
+      width: 100%;
+      margin: 10px auto;
+      position: relative;
+    }
+    .front-image {
+      width: 100%;
+      vertical-align: middle;
+    }
+    .front-text {
+      font-family: 'IBM Plex Sans KR', sans-serif;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      font-size: xx-large;
+      text-align: center;
+      top: 25%;
+      left: 40%;
+    }
+    .disney {
+        font-family: 'Noto Serif KR', serif;
+        font-size: small;
+        color: black;
+        text-align : left;
+    }
+    .button {
+        width: 210px;
+        height: 50px;
+        box-sizing: border-box;
+        appearance: none;
+        background-color: transparent;
+        border: 2px solid rgb(255, 208, 0);
+        color: rgb(255, 208, 0);
+        cursor: pointer;
+        display: flex;
+        font-size: 20px;
+        font-family: 'Noto Serif KR', serif;
+        border-radius: 20px;
+        float: right;
+        text-align: right;
+        align-self: center;
+        align-items: center;
+        align-content: center;
+        text-transform: uppercase;
+        margin: 20px;
+        padding: 1.2em, 2.8em;
+        transition: box-shadow 200ms ease-in-out, color 200ms ease-in-out;
+    }
+    .button:hover {
+        box-shadow: 0 0 40px 40px rgb(255, 208, 0) inset;
+        color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="front">
+    <div class="front-image">
+      <img src="eco.jpg" alt="my image" style="display: block; margin: 0 auto;">
+    </div>
+    <div class="front-text">
+      <p>우리나라 온실가스 배출량</p>
+    </div>
+  </div>
+    <canvas id="emissionsChart"></canvas>
+
+  <script>
+    // 연도와 탄소 배출량
+    const emissionsData = {
+      labels: ["2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"],
+      datasets: [{
+        label: "온실가스 총배출량(백만톤CO2eq)",
+        data: [684.8, 688.0, 697.3, 692.1, 692.6, 693.7, 710.6, 727.0, 701.2, 656.2],
+        fill: false,
+        borderColor: "rgba(255, 99, 132, 1)",
+        tension: 0.1
+      },
+      {
+        label: "온실가스 순배출량(백만톤CO2eq)",
+        data: [629.5, 638.8, 652.3, 646.2, 646.1, 646.8, 669.0, 686.6, 663.5, 618.3],
+        fill: false,
+        borderColor: "rgba(54, 162, 235, 1)",
+        tension: 0.1
+      }]
+    };
+
+    // 차트 만들기
+    const ctx = document.getElementById('emissionsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: emissionsData,
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            display: true,
+            title: {
+              display: true,
+              text: '연도'
+            }
+          },
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: '온실가스 배출량(백만톤CO2eq)'
+            },
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        }
+      }
+    });
+  </script>
+  <div class="button" onclick="window.open('country.html',',')">다른 나라와 비교해보기</div>
+  <a class="disney" href="https://www.index.go.kr/unity/potal/main/EachDtlPageDetail.do?idx_cd=1464" target="_blank">출처 : e-나라지표(국가 온실가스 배출현황)</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Earth's temperature</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap');
+    body {
+        background-image: linear-gradient(to top, rgba(255, 162, 104, 0.4), rgba(255, 230, 0, 0.4));
+        height: 1000px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        opacity: 100%;
+    }
+    .read {
+      font-family: 'IBM Plex Sans KR', sans-serif;
+      font-size: x-small;
+      color: rgb(83, 83, 83);
+      float: right;
+    }
+    .disney {
+        margin: 1px;
+        font-family: 'Noto Serif KR', serif;
+        font-size: small;
+        color: black;
+        text-align : left;
+    }
+    </style>
+</head>
+    <body>
+        <canvas id="emissionsChart"></canvas>
+
+    <script>
+        // 연도와 탄소 배출량
+        const emissionsData = {
+        labels: ["2000/3/15","2001/3/15","2002/3/15","2003/3/15","2004/3/15","2005/3/15","2006/3/15","2007/3/15","2008/3/15","2009/3/15","2010/3/15",
+        "2011/3/15", "2012/3/15", "2013/3/15", "2014/3/15", "2015/3/15", "2016/3/15", "2017/3/15", "2018/3/15", "2019/3/15", "2020/3/15", "2021/3/15", "2022/3/15", "2023/3/15"],
+        datasets: [{
+            label: "온도(°C)",
+            data: [0.55,0.56,0.88,0.60,0.63,0.74,0.63,0.73,0.75,0.54,0.93,0.66,0.58,0.67,0.78,0.96,1.36,1.16,0.88,1.17,1.17,0.89,1.05,1.21],
+            fill: false,
+            borderColor: "rgba(255, 85, 0, 1)",
+            tension: 0.1
+        }]
+        };
+
+        // 차트 만들기
+        const ctx = document.getElementById('emissionsChart').getContext('2d');
+        new Chart(ctx, {
+        type: 'line',
+        data: emissionsData,
+        options: {
+            responsive: true,
+            scales: {
+            x: {
+                display: true,
+                title: {
+                display: true,
+                text: '연도/월/일'
+                }
+            },
+            y: {
+                display: true,
+                title: {
+                display: true,
+                text: '지구온도 변화량(°C)'
+                },
+                ticks: {
+                beginAtZero: true
+                }
+            }
+            }
+        }
+        });
+    </script>
+    <a class="disney" href="https://ourworldindata.org/explorers/climate-change?time=2009-09-15..latest&facet=none&country=OWID_WRL~ATA~Gulkana+Glacier~Lemon+Creek+Glacier~OWID_NAM~South+Cascade+Glacier~Wolverine+Glacier&Metric=Temperature+anomaly&Long-run+series=false" target="_blank">출처 : Our World in Data(Global warming: monthly temperature anomaly)</a>
+    <p class="read">지구온도가 0°C인 기준으로 생각하시면 됩니다. (ex 0.5°C -> 원래 지구온도보다 0.5°C 높아짐)</p>
+</body>
+</html>
